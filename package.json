@@ -1,0 +1,22 @@
+{
+  "name": "dist",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "json": "json-server db.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PaulinhoTortuga/Food-Project.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PaulinhoTortuga/Food-Project/issues"
+  },
+  "homepage": "https://github.com/PaulinhoTortuga/Food-Project#readme",
+  "devDependencies": {
+    "json-server": "^0.17.0"
+  }
+}
