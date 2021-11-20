@@ -191,12 +191,6 @@ window.addEventListener('DOMContentLoaded', function() {
         return await res.json();
     };
 
-    // getResource('http://localhost:3000/menu')
-    //             .then(data => {
-    //                 data.forEach(({img, altimg, title, descr, price}) => {
-    //                     new MenuCard(img, altimg, title, descr, price, '.menu .container').render();
-    //                 }) ;
-    //             });
         getResource('http://localhost:3000/menu')
                     .then(data => createCard(data));
 
@@ -222,7 +216,8 @@ window.addEventListener('DOMContentLoaded', function() {
                     });
     
                 }
-                    // Forms
+                   
+                // Forms
 
     const forms = document.querySelectorAll('form');
     const message = {
@@ -330,7 +325,7 @@ window.addEventListener('DOMContentLoaded', function() {
         indicators.forEach(dot => dot.style.opacity = '.5');
         indicators[slideIndex - 1].style.opacity = 1;
     }
-
+    
     if (slides.length < 10) {
         total.textContent = `0${slides.length}`;
         current.textContent = `0${slideIndex}`;
@@ -393,12 +388,16 @@ window.addEventListener('DOMContentLoaded', function() {
         dots.append(dot);
         indicators.push(dot);
     }
+    
+    function pxCut(width){
+        return +width.replace(/\D/g, '');
+     }
 
     next.addEventListener('click', () => {
-        if (offset == +width.slice(0, width.length - 2) * (slides.length - 1)){
+        if (offset == pxCut(width) * (slides.length - 1)){
             offset = 0;
         } else {
-            offset += +width.slice(0, width.length - 2);
+            offset += pxCut(width);
         }
         
         slidesFieldTransform();
@@ -410,15 +409,14 @@ window.addEventListener('DOMContentLoaded', function() {
         }
 
         countDisplay(); 
-
         dotsDisplay();
     });
 
     prev.addEventListener('click', () => {
         if (offset == 0){ 
-            offset = +width.slice(0, width.length - 2) * (slides.length - 1)
+            offset = pxCut(width) * (slides.length - 1)
         } else {
-            offset -= +width.slice(0, width.length - 2);
+            offset -= pxCut(width);
         }
         
         slidesFieldTransform();
@@ -430,7 +428,6 @@ window.addEventListener('DOMContentLoaded', function() {
         }
 
         countDisplay(); 
-
         dotsDisplay();
     });
 
@@ -439,12 +436,10 @@ window.addEventListener('DOMContentLoaded', function() {
             const slideTo = e.target.getAttribute('data-slide-to');
 
             slideIndex = slideTo;
-            offset = +width.slice(0, width.length - 2) * (slideTo - 1);
+            offset = pxCut(width) * (slideTo - 1);
 
             slidesFieldTransform();
-
             countDisplay(); 
-
             dotsDisplay();
         })
     });
