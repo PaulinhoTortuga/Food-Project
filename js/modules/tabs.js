@@ -1,10 +1,9 @@
-function tabs() {
-   
-    const tabs = document.querySelectorAll('.tabheader__item'),
-    tabsContent = document.querySelectorAll('.tabcontent'),
-    tabsParent = document.querySelector('.tabheader__items');
+function tabs(tabsSelector, tabsContentSelector, tabsParentSelector, activeClass) {
+	let tabs = document.querySelectorAll(tabsSelector),
+		tabsContent = document.querySelectorAll(tabsContentSelector),
+		tabsParent = document.querySelector(tabsParentSelector);
 
-    function hideTabContent() {
+	function hideTabContent() {
         
         tabsContent.forEach(item => {
             item.classList.add('hide');
@@ -12,30 +11,30 @@ function tabs() {
         });
 
         tabs.forEach(item => {
-            item.classList.remove('tabheader__item_active');
+            item.classList.remove(activeClass);
         });
-    }
+	}
 
-    function showTabContent(i = 0) {
+	function showTabContent(i = 0) {
         tabsContent[i].classList.add('show', 'fade');
         tabsContent[i].classList.remove('hide');
-        tabs[i].classList.add('tabheader__item_active');
+        tabs[i].classList.add(activeClass);
     }
-
+    
     hideTabContent();
     showTabContent();
 
-    tabsParent.addEventListener('click', function(event) {
+	tabsParent.addEventListener('click', function(event) {
         const target = event.target;
-        if(target && target.classList.contains('tabheader__item')) {
+		if(target && target.classList.contains(tabsSelector.slice(1))) {
             tabs.forEach((item, i) => {
                 if (target == item) {
                     hideTabContent();
                     showTabContent(i);
                 }
             });
-        }
+		}
     });
 }
 
-module.exports = tabs;
+export default tabs;
